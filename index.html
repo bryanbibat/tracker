@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>Tracker</title>
+    <link href="css/flags.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
       .gray {
         color: gray;
@@ -19,8 +20,9 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.0/backbone.localStorage-min.js"></script>
     <script src="js/tracer.js"></script>
     <script type="text/template" id="ip-info-template">
-      <label>IP Address:</label> <%= geoplugin_request %><br/>
-      <label>Country:</label> <%= geoplugin_countryName %>
+      <img src="images/blank.png" class="flag flag-<%= geoplugin_countryCode %> alt="<%= geoplugin_countryName %>" title="<%= geoplugin_countryName %>" />
+      <label>IP:</label>
+      <%= geoplugin_request %>
     </script>
   </body>
 </html>
