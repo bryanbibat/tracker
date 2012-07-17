@@ -16,7 +16,7 @@ $(function(){
     tagName: "div",
     template: _.template($('#ip-info-template').html()),
     events: { 
-      "click": "updateMap",
+      "click": "scrollUpdateMap",
       "mouseover": "highlight",
       "mouseout": "unhighlight"
     },
@@ -29,6 +29,10 @@ $(function(){
       this.$el.addClass("row past-search")
       this.updateMap();
       return this;
+    },
+    scrollUpdateMap: function() {
+      $("html, body").animate({"scrollTop": $("#tracer-app").position().top - 10});
+      this.updateMap();
     },
     updateMap: function() {
       this.options.gmap.panTo(new google.maps.LatLng(this.model.get("geoplugin_latitude"),this.model.get("geoplugin_longitude")));
