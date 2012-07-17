@@ -30,10 +30,10 @@ $(function(){
     events: { "keypress #new-ip": "findOnEnter" },
     initialize: function() {
       this.input = this.$("#new-ip");
+      this.map = this.$("#map");
       IPInfos.bind('add', this.searchNew, this);
       IPInfos.bind('reset', this.addAll, this);
       IPInfos.fetch();
-      console.log(IPInfos);
     },
 
     findOnEnter: function(e) {
@@ -51,6 +51,12 @@ $(function(){
     searchNew: function(ipInfo) {
       var view = new IPInfoView({ model: ipInfo });
       this.$("#results").prepend(view.render().el);
+      var myOptions = {
+          zoom: 6,
+          center: new google.maps.LatLng(ipInfo.get("geoplugin_latitude"),ipInfo.get("geoplugin_longitude")),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      new google.maps.Map(document.getElementById("map"), myOptions);
     },
 
     addAll: function() {
