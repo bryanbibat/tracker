@@ -16,7 +16,7 @@ $(function(){
     tagName: "div",
     template: _.template($('#ip-info-template').html()),
     events: { 
-      "click": "updateMap",
+      "click": "scrollUpdateMap",
       "mouseover": "highlight",
       "mouseout": "unhighlight"
     },
@@ -30,13 +30,13 @@ $(function(){
       this.updateMap();
       return this;
     },
+    scrollUpdateMap: function() {
+      $("html, body").animate({"scrollTop": $("#tracer-app").position().top - 10});
+      this.updateMap();
+    },
     updateMap: function() {
-      var myOptions = {
-          zoom: 6,
-          center: new google.maps.LatLng(this.model.get("geoplugin_latitude"),this.model.get("geoplugin_longitude")),
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      new google.maps.Map(document.getElementById("map"), myOptions);
+      this.options.gmap.panTo(new google.maps.LatLng(this.model.get("geoplugin_latitude"),this.model.get("geoplugin_longitude")));
+      this.options.gmap.setZoom(6);
     },
     highlight: function() {
       this.$el.addClass("highlight");
@@ -52,9 +52,14 @@ $(function(){
     events: { "keypress #new-ip": "findOnEnter" },
     initialize: function() {
       this.input = this.$("#new-ip");
-      this.map = this.$("#map");
       IPInfos.bind('add', this.searchNew, this);
       IPInfos.bind('reset', this.addAll, this);
+      var myOptions = {
+          zoom: 1,
+          center: new google.maps.LatLng(14.58, 121),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      this.gmap = new google.maps.Map(document.getElementById("map"), myOptions);
       IPInfos.fetch();
     },
 
@@ -71,12 +76,12 @@ $(function(){
     },
 
     searchNew: function(ipInfo) {
-      var view = new IPInfoView({ model: ipInfo });
+      var view = new IPInfoView({ model: ipInfo, gmap: this.gmap });
       this.$("#results").prepend(view.render().el);
     },
 
     addAll: function() {
-      IPInfos.each(this.searchNew);
+      IPInfos.each(this.searchNew, this);
     }
 
   });

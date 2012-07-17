@@ -11,6 +11,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
+    <link href="favicon.png" rel="shortcut icon">
     <title>Tracker</title>
 
     <!-- Included CSS Files -->
@@ -30,12 +31,12 @@
     <![endif]-->
   </head>
   <body>
-    <div class="row">
+    <header class="row">
       <div class="twelve columns">
         <h1>Trac<span class="gray">k</span>er</h1>
         <hr />
       </div>
-    </div>
+    </header>
     <div class="container" id="tracer-app">
       <div class="row">
         <div class="three columns">
@@ -47,6 +48,14 @@
       </div>
       <div id="results"></div>
     </div>
+    <footer class="row">
+      <div class="twelve columns">
+        <p>
+          &copy; 2012 <a href="http://bryanbibat.net/">Bryan Bibat</a><br/>
+          Made with <a href="http://backbonejs.org">Backbone.js</a>, <a href="http://foundation.zurb.com">Foundation</a>, <a href="http://www.geoplugin.com">geoPlugin</a>, and <a href="https://developers.google.com/maps/">Google Maps</a>
+        </p>
+      </div>
+    </footer>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
