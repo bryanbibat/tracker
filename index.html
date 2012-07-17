@@ -22,7 +22,8 @@
     <script type="text/template" id="ip-info-template">
       <img src="images/blank.png" class="flag flag-<%= geoplugin_countryCode %> alt="<%= geoplugin_countryName %>" title="<%= geoplugin_countryName %>" />
       <label>IP:</label>
-      <%= geoplugin_request %>
+      <%= geoplugin_request %><br>
+      <%= (new Date(Date.parse(requested_at))).toString() %>
     </script>
   </body>
 </html>
