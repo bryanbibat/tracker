@@ -40,7 +40,7 @@ $(function(){
       if (e.keyCode != 13) return;
       if (!this.input.val()) return;
       var gpUrl = "http://www.geoplugin.net/json.gp?jsoncallback=?";
-      var data = { "ip": this.input.val()}
+      var data = { "ip": $.trim(this.input.val()) }
       $.getJSON(gpUrl, data, function(geodata) {
         geodata.requested_at = new Date;
         IPInfos.create(geodata);
