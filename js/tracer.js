@@ -21,6 +21,7 @@ $(function(){
     },
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
+      this.$el.addClass("row past-search")
       return this;
     }
   });
