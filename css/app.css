@@ -23,6 +23,10 @@
 }
 .past-search {
   padding: 10px;
+  cursor: pointer;
+}
+.highlight {
+  background: #EEE;
 }
 
 /* -----------------------------------------

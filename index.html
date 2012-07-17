@@ -56,7 +56,9 @@
     <script type="text/template" id="ip-info-template">
       <div class="four columns end ">
         <img src="images/blank.png" class="flag flag-<%= geoplugin_countryCode.toLowerCase() %> alt="<%= geoplugin_countryName %>" title="<%= geoplugin_countryName %>" />
-        <%= geoplugin_request %><br>
+        <%= geoplugin_request %><br />
+        City: <%= geoplugin_city %><br />
+        Region: <%= geoplugin_region %>
       </div>
       <div class="six columns end ">
         <%= (new Date(Date.parse(requested_at))).toString() %>

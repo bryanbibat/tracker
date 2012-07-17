@@ -15,6 +15,11 @@ $(function(){
   var IPInfoView = Backbone.View.extend({
     tagName: "div",
     template: _.template($('#ip-info-template').html()),
+    events: { 
+      "click": "updateMap",
+      "mouseover": "highlight",
+      "mouseout": "unhighlight"
+    },
 
     initialize: function() {
       this.model.bind('change', this.render, this);
@@ -22,8 +27,24 @@ $(function(){
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.addClass("row past-search")
+      this.updateMap();
       return this;
+    },
+    updateMap: function() {
+      var myOptions = {
+          zoom: 6,
+          center: new google.maps.LatLng(this.model.get("geoplugin_latitude"),this.model.get("geoplugin_longitude")),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      new google.maps.Map(document.getElementById("map"), myOptions);
+    },
+    highlight: function() {
+      this.$el.addClass("highlight");
+    },
+    unhighlight: function() {
+      this.$el.removeClass("highlight");
     }
+
   });
 
   var AppView = Backbone.View.extend({
@@ -52,12 +73,6 @@ $(function(){
     searchNew: function(ipInfo) {
       var view = new IPInfoView({ model: ipInfo });
       this.$("#results").prepend(view.render().el);
-      var myOptions = {
-          zoom: 6,
-          center: new google.maps.LatLng(ipInfo.get("geoplugin_latitude"),ipInfo.get("geoplugin_longitude")),
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      new google.maps.Map(document.getElementById("map"), myOptions);
     },
 
     addAll: function() {
